@@ -72,6 +72,8 @@
         top: 10px;
         right: 10px;
         z-index: 9999;
+        font-family: 'Roboto Mono', monospace;
+        color: #000000;
     }
 
     .sound-control-panel {
@@ -82,7 +84,7 @@
         border-radius: 8px;
         border: 2px solid #87887f;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        font-family: Arial, sans-serif;
+        font-family: 'Roboto Mono', monospace;
         font-size: 14px;
         min-width: 260px;
         margin-top: 50px;
@@ -105,16 +107,23 @@
         padding-bottom: 0;
     }
 
+    /* Стиль заголовков как в логе действий */
     .control-group-title {
+        font-family: 'Roboto', monospace;
+        font-size: 16px;
         font-weight: bold;
         margin-bottom: 8px;
-        color: #1e1e1e !important;
+        color: #000000 !important;
     }
 
+    /* Стиль подзаголовков/текста как в логе действий */
     .control-row {
         display: flex;
         align-items: center;
         margin-bottom: 8px;
+        font-family: 'Roboto', monospace;
+        font-size: 14px;
+        color: #000000;
     }
 
     .control-row:last-child {
@@ -123,13 +132,14 @@
 
     .control-label {
         min-width: 120px;
-        color: #1e1e1e;
+        color: #000000;
     }
 
     .control-value {
         min-width: 40px;
         text-align: right;
         margin-right: 10px;
+        color: #000000;
     }
 
     input[type="range"] {
@@ -144,7 +154,7 @@
         -webkit-appearance: none;
         width: 16px;
         height: 16px;
-        background: #c9894c;
+        background: #957b77;
         border-radius: 50%;
         cursor: pointer;
     }
@@ -154,6 +164,8 @@
         border-radius: 4px;
         border: 1px solid #87887f;
         background: rgba(255,255,255,0.7);
+        font-family: 'Roboto', monospace;
+        color: #000000;
     }
 
     .toggle-button {
@@ -178,34 +190,22 @@
         padding-bottom: 3px;
     }
 
-    .test-sound-btn {
-        background: #c9894c;
-        color: white;
-        border: none;
-        padding: 6px 12px;
+    .sound-btn {
+        font-family: 'Roboto', monospace;
+        font-size: 12px;
+        padding: 4px 12px;
+        background-color: #957b77;
+        color: #ffffff;
+        border: 1px solid #ccc;
         border-radius: 4px;
         cursor: pointer;
-        margin-top: 10px;
-        width: 100%;
+        transition: all 0.2s;
+        margin: 0;
     }
 
-    .test-sound-btn:hover {
-        background: #b87a40;
-    }
-
-    .reset-sound-btn {
-        background: #87887f;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 5px;
-        width: 100%;
-    }
-
-    .reset-sound-btn:hover {
-        background: #6e6e66;
+    .sound-btn:hover {
+        background-color: #7a625e;
+        border-color: #aaa;
     }
 
     .button-group {
@@ -281,8 +281,8 @@
         </div>
 
         <div class="button-group">
-            <button class="test-sound-btn" id="testSoundBtn">Проверить</button>
-            <button class="reset-sound-btn" id="resetSoundBtn">Сбросить</button>
+            <button class="sound-btn" id="testSoundBtn">Проверить</button>
+            <button class="sound-btn" id="resetSoundBtn">Сбросить</button>
         </div>
     `;
 
