@@ -190,6 +190,7 @@
         padding-bottom: 3px;
     }
 
+
     .sound-btn {
         font-family: 'Roboto', monospace;
         font-size: 12px;
@@ -359,12 +360,13 @@
     // 5. Функция обновления заголовка
     function updateTitle() {
         try {
-            const battleTimer = document.querySelector('p.turn-text.svelte-1yiowxi');
+            // Changed selector for battle timer - removed 'svelte-1rta3dd' from the selector
+            const battleTimer = document.querySelector('p.turn-text');
             if (battleTimer && battleTimer.textContent.includes('Сейчас ходит')) {
                 const timerText = battleTimer.textContent.trim();
                 const timeMatch = timerText.match(/\d+/);
                 const nameMatch = timerText.match(/Сейчас ходит\s+(.+?)\./);
-                const initiative = document.querySelector('p.initiative-value.svelte-1cage5m')?.textContent?.trim() || '?';
+                const initiative = document.querySelector('p.initiative-value')?.textContent?.trim() || '?';
 
                 if (timeMatch && nameMatch) {
                     document.title = `${timeMatch[0]} сек. / И-${initiative} / ${nameMatch[1].trim()}`;
@@ -372,7 +374,44 @@
                 }
             }
 
-            const normalTimer = document.querySelector('div.panel.svelte-1t5p5a7 > p.svelte-1t5p5a7');
+            // Also removed svelte class from normal timer selector
+            const normalTimer = document.querySelector('div.panel > p');
+            if (normalTimer) {
+                const timerText = normalTimer.textContent.trim();
+                if (timerText.includes('осталось') && timerText.includes('сек')) {
+                    const time = timerText.match(/\d+/)?.[0] || '';
+                    const action = timerText.split('осталось')[0].trim();
+                    document.title = `${time} сек. / ${action}`;
+                    return;
+                }
+            }
+
+            document.title = 'KINWOODS / Лес';
+        } catch (e) {
+            console.error('Ошибка:', e);
+            document.title = 'KINWOODS / Лес';
+        }
+    }    
+    
+    // 5. Функция обновления заголовка
+    function updateTitle() {
+        try {
+            // Changed selector for battle timer - removed 'svelte-1rta3dd' from the selector
+            const battleTimer = document.querySelector('p.turn-text');
+            if (battleTimer && battleTimer.textContent.includes('Сейчас ходит')) {
+                const timerText = battleTimer.textContent.trim();
+                const timeMatch = timerText.match(/\d+/);
+                const nameMatch = timerText.match(/Сейчас ходит\s+(.+?)\./);
+                const initiative = document.querySelector('p.initiative-value')?.textContent?.trim() || '?';
+
+                if (timeMatch && nameMatch) {
+                    document.title = `${timeMatch[0]} сек. / И-${initiative} / ${nameMatch[1].trim()}`;
+                    return;
+                }
+            }
+
+            // Also removed svelte class from normal timer selector
+            const normalTimer = document.querySelector('div.panel > p');
             if (normalTimer) {
                 const timerText = normalTimer.textContent.trim();
                 if (timerText.includes('осталось') && timerText.includes('сек')) {
@@ -393,7 +432,7 @@
     // 6. Проверка завершения действия со звуком
     let lastTimerState = null;
     function checkActionCompletion() {
-        const timerElement = document.querySelector('p.turn-text.svelte-1yiowxi, div.panel.svelte-1t5p5a7 > p.svelte-1t5p5a7');
+        const timerElement = document.querySelector('p.turn-text.svelte-1rta3dd, div.panel.svelte-1t5p5a7 > p.svelte-1t5p5a7');
         const currentState = timerElement?.textContent?.trim();
 
         if (lastTimerState && !currentState && GM_getValue('soundEnabled', defaultSettings.soundEnabled)) {
